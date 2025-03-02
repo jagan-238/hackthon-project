@@ -43,3 +43,6 @@ Tech Stack
 HTML - Structure
 CSS - Styling (Custom CSS or Tailwind)
 JavaScript - Interactivity and localStorage for data persistence
+## Live Demo
+[View the project here](https://jagan-238.github.io/hackthon-project/)
+
