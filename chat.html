@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Chat Room</title>
+    <style>
+        /* General Styling */
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('https://wallpaperaccess.com/full/1164298.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    text-align: center;
+}
+
+.chat-container {
+    width: 300px;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.chat-box {
+    height: 250px;
+    overflow-y: auto;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    text-align: left;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+.message {
+    padding: 8px;
+    margin: 8px 0;
+    border-radius: 6px;
+    word-wrap: break-word;
+    display: block;
+    background: rgba(255, 64, 129, 0.8);
+    color: white;
+    font-size: 14px;
+    text-align: left;
+    max-width: 80%;
+}
+
+.input-box {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+input {
+    flex: 1;
+    padding: 8px;
+    border: 2px solid black;
+    border-radius: 15px;
+    outline: none;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+button {
+    padding: 8px;
+    background: #00c853;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #00963d;
+}
+
+.clear-btn {
+    background: #ff4081;
+}
+
+.clear-btn:hover {
+    background: #e6006d;
+}
+
+    </style>
+</head>
+<body>
+
+    <!-- Chat Container -->
+    <div class="chat-container">
+        <h2>Chat Room</h2>
+        <div class="chat-box" id="chat-box"></div>
+
+        <!-- Message Input -->
+        <div class="input-box">
+            <input type="text" id="message-input" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+            <button class="clear-btn" onclick="clearChat()">Clear</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            loadChat();
+        });
+
+        function sendMessage() {
+            let messageInput = document.getElementById("message-input");
+            let messageText = messageInput.value.trim();
+
+            if (messageText === "") return;
+
+            let messages = JSON.parse(localStorage.getItem("chatMessages")) || [];
+            messages.push(messageText);
+            localStorage.setItem("chatMessages", JSON.stringify(messages));
+
+            messageInput.value = "";
+            loadChat();
+        }
+
+        function loadChat() {
+            let chatBox = document.getElementById("chat-box");
+            chatBox.innerHTML = "";
+
+            let messages = JSON.parse(localStorage.getItem("chatMessages")) || [];
+
+            messages.forEach(msg => {
+                let messageDiv = document.createElement("div");
+                messageDiv.classList.add("message");
+                messageDiv.textContent = msg;
+                chatBox.appendChild(messageDiv);
+            });
+
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function clearChat() {
+            localStorage.removeItem("chatMessages");
+            loadChat();
+        }
+    </script>
+
+</body>
+</html>
+

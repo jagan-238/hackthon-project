@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+    
+    body { 
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('https://www.millerchemical.com/wp-content/uploads/2023/11/Miller-Blog-Farm-Innovations.jpg') no-repeat center center fixed;
+    background-size: cover;
+    text-align: center;
+    color: #222; 
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 128, 0, 0.8);
+    padding: 15px 50px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    color: white;
+    border: 2px solid black;
+    height: 60px; /* Fixed height */
+}
+
+nav img {
+    height: 40px;
+}
+
+nav h1 {
+    font-size: 24px;
+    margin: 0;
+    line-height: 60px; 
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+    line-height: 60px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    color: #f8f9fa;
+    text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.6);
+}
+.hero {
+    position: relative;
+    height: 90vh; 
+    background: linear-gradient(135deg, #00c853, #ff4081);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 20px;
+    border: 2px solid black;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* Call-To-Action Button */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background: white;
+    color: #00c853;
+    font-size: 18px;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border: 2px solid black;
+}
+
+.btn:hover {
+    background: #ff4081;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Profile Container */
+.profile-container {
+    max-width: 400px;
+    padding: 25px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid black;
+    
+    /* Centering */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+input {
+    width: 95%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    width: 48%;
+    padding: 12px;
+    background: #ff69b4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    border: 2px solid black;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #d63384;
+}
+
+#profile-display {
+    display: none;
+    margin-top: 20px;
+}
+
+#profile-display h3 {
+    margin-bottom: 10px;
+}
+
+#profile-display p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        text-align: center;
+        padding: 10px;
+        height: auto;
+    }
+
+    nav ul {
+        flex-direction: column;
+        padding-top: 10px;
+    }
+
+    nav ul li {
+        margin: 5px 0;
+        line-height: 1.5;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .profile-container {
+        width: 90%;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <img src="logo.png" alt="Logo">
+        <h1>Collab Platform</h1>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="ideas.html">Ideas</a></li>
+            <li><a href="tasks.html">Tasks</a></li>
+            <li><a href="chat.html">Chat</a></li>
+        </ul>
+    </nav>
+
+    <!-- Profile Form -->
+    <section class="profile-container">
+        <h2>Create Your Profile</h2>
+        <form id="profile-form">
+            <input type="text" id="name" placeholder="Enter Name" required>
+            <input type="text" id="skills" placeholder="Enter Skills (comma-separated)" required>
+            <input type="text" id="interests" placeholder="Enter Interests (comma-separated)" required>
+            <button type="submit">Save</button>
+            <button type="reset">Reset</button>
+        </form>
+
+        <!-- Display User Profile -->
+        <div id="profile-display">
+            <h3>Saved Profile</h3>
+            <p><strong>Name:</strong> <span id="display-name"></span></p>
+            <p><strong>Skills:</strong> <span id="display-skills"></span></p>
+            <p><strong>Interests:</strong> <span id="display-interests"></span></p>
+            <button id="edit-profile">Edit</button>
+            <button id="delete-profile">Delete</button>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const profileForm = document.getElementById("profile-form");
+            const nameInput = document.getElementById("name");
+            const skillsInput = document.getElementById("skills");
+            const interestsInput = document.getElementById("interests");
+
+            const displayName = document.getElementById("display-name");
+            const displaySkills = document.getElementById("display-skills");
+            const displayInterests = document.getElementById("display-interests");
+            const profileDisplay = document.getElementById("profile-display");
+
+            const editBtn = document.getElementById("edit-profile");
+            const deleteBtn = document.getElementById("delete-profile");
+
+            function loadProfile() {
+                const profile = JSON.parse(localStorage.getItem("userProfile"));
+                if (profile) {
+                    displayName.textContent = profile.name;
+                    displaySkills.textContent = profile.skills;
+                    displayInterests.textContent = profile.interests;
+                    profileDisplay.style.display = "block";
+                    profileForm.style.display = "none";
+                }
+            }
+
+            profileForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+                const profile = {
+                    name: nameInput.value,
+                    skills: skillsInput.value,
+                    interests: interestsInput.value
+                };
+                localStorage.setItem("userProfile", JSON.stringify(profile));
+                loadProfile();
+            });
+
+            editBtn.addEventListener("click", function () {
+                profileForm.style.display = "block";
+                profileDisplay.style.display = "none";
+                nameInput.value = displayName.textContent;
+                skillsInput.value = displaySkills.textContent;
+                interestsInput.value = displayInterests.textContent;
+            });
+
+            deleteBtn.addEventListener("click", function () {
+                localStorage.removeItem("userProfile");
+                location.reload();
+            });
+
+            loadProfile();
+        });
+    </script>
+
+</body>
+</html>
